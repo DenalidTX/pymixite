@@ -1,7 +1,7 @@
 import unittest
 
-from src.mixite.coord import CubeCoordinate
-from src.mixite.builder import GridControlBuilder, GridControl, GridBuildException
+from mixite.coord import CubeCoordinate
+from mixite.builder import GridControlBuilder, GridControl, GridBuildException
 
 
 class TestGridControlBuilder(unittest.TestCase):

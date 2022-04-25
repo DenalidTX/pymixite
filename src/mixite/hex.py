@@ -4,9 +4,9 @@ import math
 from abc import ABC, abstractmethod
 from typing import Generic, Optional, TypeVar
 
-from src.mixite.location_metadata import SatelliteDataType
-from src.mixite.coord import CubeCoordinate
-from src.mixite.shapes import Point, Rectangle
+from mixite.location_metadata import SatelliteDataType
+from mixite.coord import CubeCoordinate
+from mixite.shapes import Point, Rectangle
 
 
 class Hexagon(ABC, Generic[SatelliteDataType]):

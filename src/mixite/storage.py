@@ -3,8 +3,8 @@ from __future__ import annotations  # This enables us to type hint a class withi
 from abc import ABC, abstractmethod
 from typing import Generic, Optional
 
-from src.mixite.coord import CubeCoordinate
-from src.mixite import HexagonDataType
+from mixite.coord import CubeCoordinate
+from mixite import HexagonDataType
 
 
 class HexagonDataStorage(ABC, Generic[HexagonDataType]):

@@ -1,7 +1,7 @@
 import unittest
 
-from src.mixite.coord import CubeCoordinate
-from src.mixite.layout import RectangleGridLayoutStrategy, TriangleGridLayoutStrategy, TrapezoidGridLayoutStrategy, \
+from mixite.coord import CubeCoordinate
+from mixite.layout import RectangleGridLayoutStrategy, TriangleGridLayoutStrategy, TrapezoidGridLayoutStrategy, \
     HexagonGridLayoutStrategy
 
 

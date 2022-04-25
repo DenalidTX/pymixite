@@ -4,11 +4,11 @@ import math
 from abc import abstractmethod, ABC
 from typing import Generic, Type
 
-from src.mixite.shapes import Point
-from src.mixite.hex import HexagonDataType, GridData
-from src.mixite.storage import HexagonDataStorage
-from src.mixite.coord import CoordinateConverter, CubeCoordinate
-from src.mixite.location_metadata import SatelliteDataType
+from mixite.shapes import Point
+from mixite.hex import HexagonDataType, GridData
+from mixite.storage import HexagonDataStorage
+from mixite.coord import CoordinateConverter, CubeCoordinate
+from mixite.location_metadata import SatelliteDataType
 
 
 class HexagonGrid(ABC, Generic[HexagonDataType, SatelliteDataType]):

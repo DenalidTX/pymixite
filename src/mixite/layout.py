@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from math import floor
 
-from src.mixite.coord import CubeCoordinate, CoordinateConverter
+from mixite.coord import CubeCoordinate, CoordinateConverter
 
 
 class GridLayoutStrategy(ABC):

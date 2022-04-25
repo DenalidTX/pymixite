@@ -1,8 +1,8 @@
 import unittest
 
-from src.mixite.hex import GridData, HexagonImpl
-from src.mixite.coord import CubeCoordinate
-from src.mixite.storage import DefaultHexagonDataStorage
+from mixite.hex import GridData, HexagonImpl
+from mixite.coord import CubeCoordinate
+from mixite.storage import DefaultHexagonDataStorage
 
 
 class TestDefaultHexagonDataStorage(unittest.TestCase):

@@ -1,5 +1,5 @@
 from unittest import TestCase, main
-from src.mixite.shapes import Point, Rectangle
+from mixite.shapes import Point, Rectangle
 
 
 class TestPoint(TestCase):

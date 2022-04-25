@@ -1,6 +1,6 @@
 import unittest
 
-from src.mixite.coord import CubeCoordinate, CoordinateConverter, RotationDirection
+from mixite.coord import CubeCoordinate, CoordinateConverter, RotationDirection
 
 
 def create_incomplete_key():
