@@ -32,7 +32,7 @@ class GridControlBuilder:
         strategy = RectangleGridLayoutStrategy()
         self.check_size(strategy, width, height)
         grid = HexagonGridImpl(grid_data, DefaultHexagonDataStorage())
-        self.populate_storage(grid.storage, grid_data, strategy.fetch_grid_coords(width, height, orientation))
+        self.populate_storage(grid, grid_data, strategy.fetch_grid_coords(width, height, orientation))
         return GridControl(grid, HexagonGridCalculator(grid), grid_data)
 
     def build_hexagon(self, orientation: str, radius: float, width: int, height: int) -> GridControl:
@@ -40,7 +40,7 @@ class GridControlBuilder:
         strategy = HexagonGridLayoutStrategy()
         self.check_size(strategy, width, height)
         grid = HexagonGridImpl(grid_data, DefaultHexagonDataStorage())
-        self.populate_storage(grid.storage, grid_data, strategy.fetch_grid_coords(width, height, orientation))
+        self.populate_storage(grid, grid_data, strategy.fetch_grid_coords(width, height, orientation))
         return GridControl(grid, HexagonGridCalculator(grid), grid_data)
 
     def build_triangle(self, orientation: str, radius: float, width: int, height: int) -> GridControl:
@@ -48,7 +48,7 @@ class GridControlBuilder:
         strategy = TriangleGridLayoutStrategy()
         self.check_size(strategy, width, height)
         grid = HexagonGridImpl(grid_data, DefaultHexagonDataStorage())
-        self.populate_storage(grid.storage, grid_data, strategy.fetch_grid_coords(width, height, orientation))
+        self.populate_storage(grid, grid_data, strategy.fetch_grid_coords(width, height, orientation))
         return GridControl(grid, HexagonGridCalculator(grid), grid_data)
 
     def build_trapezoid(self, orientation: str, radius: float, width: int, height: int) -> GridControl:
@@ -56,7 +56,7 @@ class GridControlBuilder:
         strategy = TrapezoidGridLayoutStrategy()
         self.check_size(strategy, width, height)
         grid = HexagonGridImpl(grid_data, DefaultHexagonDataStorage())
-        self.populate_storage(grid.storage, grid_data, strategy.fetch_grid_coords(width, height, orientation))
+        self.populate_storage(grid, grid_data, strategy.fetch_grid_coords(width, height, orientation))
         return GridControl(grid, HexagonGridCalculator(grid), grid_data)
 
     @staticmethod
@@ -69,6 +69,8 @@ class GridControlBuilder:
             raise GridBuildException("Attempted to build a grid with invalid size " + str(width) + ", " + str(height))
 
     @staticmethod
-    def populate_storage(storage: HexagonDataStorage, grid_data: GridData, coords: list[CubeCoordinate]):
+    def populate_storage(grid: HexagonGridImpl, grid_data: GridData, coords: list[CubeCoordinate]):
         for coord in coords:
-            storage.add_coord_with_data(coord, HexagonImpl(grid_data, coord))
+            hexagon = HexagonImpl(grid_data, coord)
+            grid.storage.add_coord_with_data(coord, hexagon)
+            grid.hexagons.append(hexagon)
