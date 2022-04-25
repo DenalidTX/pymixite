@@ -1,9 +1,9 @@
 from typing import Generic
 
-from mixite.coord import CubeCoordinate, RotationDirection
-from mixite.grid import HexagonGrid
-from mixite.location_metadata import SatelliteDataType
-from mixite.hex import HexagonDataType
+from src.mixite.coord import CubeCoordinate, RotationDirection
+from src.mixite.grid import HexagonGrid
+from src.mixite.location_metadata import SatelliteDataType
+from src.mixite.hex import HexagonDataType
 
 
 class HexagonGridCalculator(Generic[HexagonDataType, SatelliteDataType]):

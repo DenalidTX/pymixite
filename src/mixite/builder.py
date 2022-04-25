@@ -1,9 +1,9 @@
-from mixite.coord import CubeCoordinate
-from mixite.storage import HexagonDataStorage, DefaultHexagonDataStorage
-from mixite.grid import HexagonGrid, HexagonGridImpl
-from mixite.hex import GridData, HexagonImpl
-from mixite.calculator import HexagonGridCalculator
-from mixite.layout import GridLayoutStrategy, HexagonGridLayoutStrategy, RectangleGridLayoutStrategy, \
+from src.mixite.coord import CubeCoordinate
+from src.mixite.storage import HexagonDataStorage, DefaultHexagonDataStorage
+from src.mixite.grid import HexagonGrid, HexagonGridImpl
+from src.mixite.hex import GridData, HexagonImpl
+from src.mixite.calculator import HexagonGridCalculator
+from src.mixite.layout import GridLayoutStrategy, HexagonGridLayoutStrategy, RectangleGridLayoutStrategy, \
     TriangleGridLayoutStrategy, TrapezoidGridLayoutStrategy
 
 

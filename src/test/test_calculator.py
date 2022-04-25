@@ -1,12 +1,12 @@
 import unittest
 
-from mixite.location_metadata import SatelliteData
-from mixite.calculator import HexagonGridCalculator
-from mixite.hex import HexagonImpl
-from mixite.storage import DefaultHexagonDataStorage
-from mixite.grid import GridData, HexagonGridImpl
-from mixite.coord import CubeCoordinate, RotationDirection
-from mixite.layout import RectangleGridLayoutStrategy, GridLayoutStrategy
+from src.mixite.location_metadata import SatelliteData
+from src.mixite.calculator import HexagonGridCalculator
+from src.mixite.hex import HexagonImpl
+from src.mixite.storage import DefaultHexagonDataStorage
+from src.mixite.grid import GridData, HexagonGridImpl
+from src.mixite.coord import CubeCoordinate, RotationDirection
+from src.mixite.layout import RectangleGridLayoutStrategy, GridLayoutStrategy
 
 
 class TestHexagonGridCalculator(unittest.TestCase):
