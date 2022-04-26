@@ -1,7 +1,8 @@
 import unittest
 
 from mixite.coord import CubeCoordinate
-from mixite.builder import GridControlBuilder, GridControl, GridBuildException
+from mixite.builder import GridControlBuilder, GridControl
+from mixite.layout import GridLayoutException
 
 
 class TestGridControlBuilder(unittest.TestCase):
@@ -19,7 +20,7 @@ class TestGridControlBuilder(unittest.TestCase):
         self.assertEqual(90, len(grid_control.hex_grid.storage.cube_hex_data))
 
     def test_build_invalid(self):
-        with self.assertRaises(GridBuildException):
+        with self.assertRaises(GridLayoutException):
             GridControlBuilder().build_rectangle(
                 CubeCoordinate.POINTY_TOP,
                 30,

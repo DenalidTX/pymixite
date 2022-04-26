@@ -2,7 +2,13 @@ import unittest
 
 from mixite.coord import CubeCoordinate
 from mixite.layout import RectangleGridLayoutStrategy, TriangleGridLayoutStrategy, TrapezoidGridLayoutStrategy, \
-    HexagonGridLayoutStrategy
+    HexagonGridLayoutStrategy, GridLayoutException
+
+
+def test_invalid_params(caller, strategy, invalid_pairs):
+    for width, height in invalid_pairs:
+        with caller.assertRaises(GridLayoutException):
+            strategy.check_size(width, height)
 
 
 class TestRectangleLayout(unittest.TestCase):
@@ -67,17 +73,22 @@ class TestRectangleLayout(unittest.TestCase):
 
     def test_invalid_params(self):
         strategy = RectangleGridLayoutStrategy()
-        self.assertFalse(strategy.check_size(0, 0))
-        self.assertFalse(strategy.check_size(0, 1))
-        self.assertFalse(strategy.check_size(1, 0))
-        self.assertFalse(strategy.check_size(1, -1))
-        self.assertFalse(strategy.check_size(-1, 1))
+
+        invalid_pairs = [
+            [0, 0],
+            [0, 1],
+            [1, 0],
+            [1, -1],
+            [-1, 1]
+        ]
+
+        test_invalid_params(self, strategy, invalid_pairs)
 
     def test_valid_params(self):
         strategy = RectangleGridLayoutStrategy()
-        self.assertTrue(strategy.check_size(1, 1))
-        self.assertTrue(strategy.check_size(1, 100))
-        self.assertTrue(strategy.check_size(100, 1))
+        self.assertIsNone(strategy.check_size(1, 1))
+        self.assertIsNone(strategy.check_size(1, 100))
+        self.assertIsNone(strategy.check_size(100, 1))
 
 
 def contains_all(list1, list2) -> bool:
@@ -128,10 +139,15 @@ class TestTriangleGridLayoutStrategy(unittest.TestCase):
 
     def test_check_size(self):
         strategy = TriangleGridLayoutStrategy()
-        self.assertTrue(strategy.check_size(1, 1))
-        self.assertFalse(strategy.check_size(1, 2))
-        self.assertFalse(strategy.check_size(0, 0))
-        self.assertFalse(strategy.check_size(-1, -1))
+        self.assertIsNone(strategy.check_size(1, 1))
+
+        invalid_pairs = [
+            [0, 0],
+            [1, 2],
+            [-1, -1]
+        ]
+
+        test_invalid_params(self, strategy, invalid_pairs)
 
 
 class TestTrapezoidGridLayoutStrategy(unittest.TestCase):
@@ -177,9 +193,14 @@ class TestTrapezoidGridLayoutStrategy(unittest.TestCase):
 
     def test_check_size(self):
         strategy = TrapezoidGridLayoutStrategy()
-        self.assertTrue(strategy.check_size(2, 2))
-        self.assertFalse(strategy.check_size(0, 0))
-        self.assertFalse(strategy.check_size(-1, -1))
+        self.assertIsNone(strategy.check_size(2, 2))
+
+        invalid_pairs = [
+            [0, 0],
+            [-1, -1],
+        ]
+
+        test_invalid_params(self, strategy, invalid_pairs)
 
 
 class TestHexagonGridLayoutStrategy(unittest.TestCase):
@@ -306,12 +327,16 @@ class TestHexagonGridLayoutStrategy(unittest.TestCase):
 
     def test_check_size(self):
         strategy = HexagonGridLayoutStrategy()
-        self.assertTrue(strategy.check_size(1, 1))
-        self.assertFalse(strategy.check_size(2, 2))
-        self.assertFalse(strategy.check_size(1, 2))
-        self.assertFalse(strategy.check_size(0, 0))
-        self.assertFalse(strategy.check_size(1, 2))
-        self.assertFalse(strategy.check_size(-1, -1))
+        self.assertIsNone(strategy.check_size(1, 1))
+
+        invalid_pairs = [
+            [2, 2],
+            [1, 2],
+            [0, 0],
+            [-1, -1]
+        ]
+
+        test_invalid_params(self, strategy, invalid_pairs)
 
 
 if __name__ == '__main__':

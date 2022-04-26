@@ -4,6 +4,11 @@ from math import floor
 from mixite.coord import CubeCoordinate, CoordinateConverter
 
 
+class GridLayoutException(Exception):
+    def __init__(self, message: str):
+        self.message = message
+
+
 class GridLayoutStrategy(ABC):
 
     @abstractmethod
@@ -12,6 +17,10 @@ class GridLayoutStrategy(ABC):
 
     @abstractmethod
     def check_size(self, width: int, height: int):
+        """Raises an exception if the given parameters are invalid. The exception contains a
+        field called 'message' which provides specific information about the size requirements.
+        If no error is detected, returns None.
+        """
         pass
 
     @abstractmethod
@@ -31,7 +40,10 @@ class RectangleGridLayoutStrategy(GridLayoutStrategy):
         return coords
 
     def check_size(self, width: int, height: int):
-        return width > 0 and height > 0
+        if not (width > 0 and height > 0):
+            raise GridLayoutException("Attempted to build a grid with invalid size "
+                                      + str(width) + ", " + str(height)
+                                      + ". Rectangle dimensions must be larger than zero.")
 
     def get_name(self):
         return 'RECTANGULAR'
@@ -50,9 +62,12 @@ class TriangleGridLayoutStrategy(GridLayoutStrategy):
         return coords
 
     def check_size(self, width: int, height: int):
-        # return width > 0 and height > 0 and width == height
-        # PyCharm thinks this is simpler. I think it's obfuscated.
-        return 0 < width == height > 0
+        # width > 0 and height > 0 and width == height
+        # PyCharm thinks the below is simpler. I think it's obfuscated.
+        if not(0 < width == height > 0):
+            raise GridLayoutException("Attempted to build a grid with invalid size "
+                                      + str(width) + ", " + str(height)
+                                      + ". Triangle dimensions must be equal and larger than zero.")
 
     def get_name(self):
         return 'TRIANGULAR'
@@ -69,7 +84,10 @@ class TrapezoidGridLayoutStrategy(GridLayoutStrategy):
         return coords
 
     def check_size(self, width: int, height: int):
-        return width > 0 and height > 0
+        if not (width > 0 and height > 0):
+            raise GridLayoutException("Attempted to build a grid with invalid size "
+                                      + str(width) + ", " + str(height)
+                                      + ". Trapezoid dimensions must be larger than zero.")
 
     def get_name(self):
         return 'TRAPEZOID'
@@ -105,9 +123,12 @@ class HexagonGridLayoutStrategy(GridLayoutStrategy):
 
     def check_size(self, width: int, height: int):
         # Again, PyCharm wants to be clever. I'd rather be clear.
-        return width > 0 and height > 0 \
+        if not(width > 0 and height > 0 \
                and width == height \
-               and abs(height % 2) == 1
+               and abs(height % 2) == 1):
+            raise GridLayoutException("Attempted to build a grid with invalid size "
+                                      + str(width) + ", " + str(height)
+                                      + ". Hexagon dimensions must be equal, odd, and larger than zero.")
 
     def get_name(self):
         return 'HEXAGONAL'

@@ -1,15 +1,10 @@
 from mixite.coord import CubeCoordinate
-from mixite.storage import HexagonDataStorage, DefaultHexagonDataStorage
+from mixite.storage import DefaultHexagonDataStorage
 from mixite.grid import HexagonGrid, HexagonGridImpl
 from mixite.hex import GridData, HexagonImpl
 from mixite.calculator import HexagonGridCalculator
 from mixite.layout import GridLayoutStrategy, HexagonGridLayoutStrategy, RectangleGridLayoutStrategy, \
     TriangleGridLayoutStrategy, TrapezoidGridLayoutStrategy
-
-
-class GridBuildException(Exception):
-    def __init__(self, message: str):
-        self.message = message
 
 
 class GridControl:
@@ -65,8 +60,7 @@ class GridControlBuilder:
 
     @staticmethod
     def check_size(strategy: GridLayoutStrategy, width: int, height: int):
-        if not strategy.check_size(width, height):
-            raise GridBuildException("Attempted to build a grid with invalid size " + str(width) + ", " + str(height))
+        strategy.check_size(width, height)
 
     @staticmethod
     def populate_storage(grid: HexagonGridImpl, grid_data: GridData, coords: list[CubeCoordinate]):
