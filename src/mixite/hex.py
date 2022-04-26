@@ -12,6 +12,10 @@ from mixite.shapes import Point, Rectangle
 class Hexagon(ABC, Generic[SatelliteDataType]):
 
     @abstractmethod
+    def get_satellite(self):
+        pass
+
+    @abstractmethod
     def set_satellite(self, data: SatelliteDataType):
         pass
 
@@ -70,6 +74,9 @@ class HexagonImpl(Hexagon):
         self.external_bounding_box: Rectangle = None
         self.internal_bounding_box: Rectangle = None
         self.calc_bounding_boxes()
+
+    def get_satellite(self):
+        return self.satellite
 
     def set_satellite(self, data: SatelliteDataType):
         self.satellite = data
