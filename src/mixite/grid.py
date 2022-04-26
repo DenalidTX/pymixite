@@ -138,7 +138,9 @@ class HexagonGridImpl(HexagonGrid):
     def get_neighbors_of(self, hexagon: HexagonDataType) -> list[HexagonDataType]:
         neighbors: list[HexagonDataType] = []
         for index in range(6):
-            neighbors.append(self.get_hex_by_neighbor_index(hexagon, index))
+            neighbor = self.get_hex_by_neighbor_index(hexagon, index)
+            if neighbor is not None:
+                neighbors.append(self.get_hex_by_neighbor_index(hexagon, index))
         return neighbors
 
     # TODO: Verify that this worked.

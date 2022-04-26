@@ -180,6 +180,14 @@ class TestHexagonGridImpl(unittest.TestCase):
         self.assertTrue(HexagonImpl(grid.grid_data, CubeCoordinate(2, 8)) in neighbors)
         self.assertTrue(HexagonImpl(grid.grid_data, CubeCoordinate(2, 7)) in neighbors)
 
+    def test_retrieve_neighbors_on_edge(self):
+        grid = self.create_rect_grid(4, 4)
+        hexagon = grid.get_hex_by_cube_coord(CubeCoordinate(0, 0))
+        neighbors: list[HexagonImpl] = grid.get_neighbors_of(hexagon)
+        self.assertEqual(2, len(neighbors))
+        self.assertTrue(HexagonImpl(grid.grid_data, CubeCoordinate(1, 0)) in neighbors)
+        self.assertTrue(HexagonImpl(grid.grid_data, CubeCoordinate(0, 1)) in neighbors)
+
     def test_get_grid_data(self):
         grid = self.create_rect_grid(3, 7)
 
