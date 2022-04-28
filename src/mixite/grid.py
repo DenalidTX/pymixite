@@ -113,9 +113,11 @@ class HexagonGridImpl(HexagonGrid):
 
         for index in range(6):
             current_hex = self.get_hex_by_neighbor_index(hexagon, index)
-            current_dist = pixel.distance_from(current_hex.center)
-            if current_dist < self.grid_data.innerRadius:
-                return current_hex
+            current_dist = nearest_dist
+            if current_hex is not None:
+                current_dist = pixel.distance_from(current_hex.center)
+                if current_dist < self.grid_data.innerRadius:
+                    return current_hex
 
             if current_dist < nearest_dist:
                 nearest_dist = current_dist
