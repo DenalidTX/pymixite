@@ -74,6 +74,29 @@ class TestHexagonGridCalculator(unittest.TestCase):
 
         self.assertListEqual(expected, actual)
 
+    def test_calc_line_tricky(self):
+        """
+        This particular case failed with the initial library port.
+        """
+        self.do_init()
+
+        layout = RectangleGridLayoutStrategy()
+        grid = self.create_rect_grid(10, 10, CubeCoordinate.FLAT_TOP, layout)
+        calculator = HexagonGridCalculator(grid)
+
+        actual = calculator.draw_line(grid.get_hex_by_cube_coord(CubeCoordinate(6, 4)),
+                                      grid.get_hex_by_cube_coord(CubeCoordinate(7, -2)))
+        expected: list[HexagonImpl] = [
+            grid.get_hex_by_cube_coord(CubeCoordinate(6, 4)),
+            grid.get_hex_by_cube_coord(CubeCoordinate(6, 3)),
+            grid.get_hex_by_cube_coord(CubeCoordinate(6, 2)),
+            grid.get_hex_by_cube_coord(CubeCoordinate(6, 1)),
+            grid.get_hex_by_cube_coord(CubeCoordinate(7, 0)),
+            grid.get_hex_by_cube_coord(CubeCoordinate(7, -1)),
+            grid.get_hex_by_cube_coord(CubeCoordinate(7, -2))]
+
+        self.assertListEqual(expected, actual)
+
     def test_calc_line_1(self):
         self.do_init()
         actual = self.calculator.draw_line(self.grid.get_hex_by_cube_coord(CubeCoordinate(3, 7)),

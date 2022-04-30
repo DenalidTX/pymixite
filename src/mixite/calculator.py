@@ -109,8 +109,8 @@ class HexagonGridCalculator(Generic[HexagonDataType, SatelliteDataType]):
         result_z = round_z
 
         if diff_x > diff_y and diff_x > diff_z:
-            result_x =  -round_y - round_z
-        else:
+            result_x = -round_y - round_z
+        elif diff_y <= diff_z:
             result_z = -round_x - round_y
 
         return CubeCoordinate(result_x, result_z)
